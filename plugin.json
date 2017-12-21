@@ -1,12 +1,12 @@
 {
-  "ID":"a9d5877f430c5a86b1e4b460c4d76011",   //插件ID，32位的UUID
-  "ActionKeyword":"ts",                     //插件默认的触发关键字
-  "Name":"Timestamp",                              //插件名字
-  "Description":"日期时间与时间戳互转",    //插件介绍
-  "Author":"Aries",                     //作者
-  "Version":"1.0.0",                         //插件版本，必须是x.x.x的格式
-  "Language":"python",                       //插件语言，目前支持csharp,python
-  "Website":"http://blog.iw3c.com",         //插件网站或者个人网站
-  "IcoPath": "ui\\icon.png",              //插件图标，路径是相对插件根目录的路径
-  "ExecuteFileName":"transform.py"   //执行文件入口，如果是C#插件则填写DLL路径，如果是pyhton则填写python文件路径
+  "ID":"a9d5877f430c5a86b1e4b460c4d76011",
+  "ActionKeyword": "ts",
+  "Name": "Timestamp",
+  "Description": "本地时间与时间戳互转",
+  "Author": "Sunmoon",
+  "Version": "1.0.0",
+  "Language": "python",
+  "Website": "https://github.com/arieslee/timestampforwox",
+  "IcoPath": "ui\\icon.png",
+  "ExecuteFileName": "transform.py"
 }
