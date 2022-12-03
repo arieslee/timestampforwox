@@ -7,6 +7,7 @@
 # @Software: PyCharm
 import os
 import copy
+from typing import List
 from wox import Wox, WoxAPI
 from datetime import datetime, timedelta, timezone
 
@@ -28,30 +29,35 @@ class Main(Wox):
         query_time, _timezone = self.parse_input(key)
 
         if query_time == 'now':
-            local_time = datetime.now()
-            query_time = int(local_time.timestamp())
-            time_result = self.format_timestamp(query_time, _timezone)
-
-            unix_format = copy.deepcopy(result_template)
-            unix_format['Title'] = unix_format['Title'].format('now', query_time)
-            unix_format['JsonRPCAction']['parameters'][0] = unix_format['JsonRPCAction']['parameters'][0].format(query_time)
-            result.append(unix_format)
+            now_timestamp = int(datetime.now().timestamp())
+            self.append_timestamp_result(result, now_timestamp)
+            time_result = self.format_timestamp(now_timestamp, _timezone)
+            self.append_datetime_result(result, time_result)
+        elif self.is_timestamp(query_time):
+            query_timestamp = self.parse_timestamp(query_time)
+            time_result = self.format_timestamp(query_timestamp, _timezone)
+            self.append_datetime_result(result, time_result)
         else:
-            if self.is_timestamp(query_time):
-                query_timestamp = self.parse_timestamp(query_time)
-                time_result = self.format_timestamp(query_timestamp, _timezone)
+            if ":" in query_time:
+                time_data = datetime.strptime(query_time, "%Y-%m-%d %H:%M:%S")
             else:
-                if ":" in query_time:
-                    time_data = datetime.strptime(query_time, "%Y-%m-%d %H:%M:%S")
-                else:
-                    time_data = datetime.strptime(query_time, "%Y-%m-%d")
-                time_data = time_data.replace(tzinfo=_timezone)
-                time_result = time_data.timestamp()
+                time_data = datetime.strptime(query_time, "%Y-%m-%d")
+            time_data = time_data.replace(tzinfo=_timezone)
+            time_result = int(time_data.timestamp())
+            self.append_timestamp_result(result, time_result)
 
-        result_template['Title'] = 'result: %s' % (time_result,)
+        return result
+
+    def append_datetime_result(self, result: List[dict], time_result: str):
+        result_template['Title'] = 'datetime: %s' % (time_result,)
         result_template['JsonRPCAction']['parameters'][0] = time_result
         result.append(result_template)
-        return result
+
+    def append_timestamp_result(self, result: List[dict], timestamp: int):
+        unix_format = copy.deepcopy(result_template)
+        unix_format['Title'] = unix_format['Title'].format('timestamp', timestamp)
+        unix_format['JsonRPCAction']['parameters'][0] = str(timestamp)
+        result.append(unix_format)
 
     def parse_input(self, key: str) -> (str, timezone):
         input = key.strip()
