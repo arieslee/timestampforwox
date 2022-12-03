@@ -53,8 +53,7 @@ class Main(Wox):
         result.append(result_template)
         return result
 
-    @staticmethod
-    def parse_input(key) -> (str, timezone):
+    def parse_input(self, key: str) -> (str, timezone):
         input = key.strip()
         params = input.split(' ', 1)
         is_set_timezone = len(params) == 2 and params[0].startswith('utc')
@@ -70,17 +69,14 @@ class Main(Wox):
             query_time = input
         return query_time, used_timezone
 
-    @staticmethod
-    def format_timestamp(timestamp, _timezone) -> str:
+    def format_timestamp(self, timestamp: int, _timezone: timezone) -> str:
         return datetime.fromtimestamp(timestamp, tz=_timezone).strftime("%Y-%m-%d %H:%M:%S")
 
-    @staticmethod
-    def copy_to_clipboard(value):
+    def copy_to_clipboard(self, value):
         command = 'echo ' + str(value).strip() + '| clip'
         os.system(command)
 
-    @staticmethod
-    def is_timestamp(value) -> bool:
+    def is_timestamp(self, value: str) -> bool:
         strlen = len(value)
         '''support 10 or 13 length unixtime |支持10位或者13位unixtime'''
         if strlen != 10 and strlen != 13:
@@ -91,8 +87,7 @@ class Main(Wox):
             return False
         return True
 
-    @staticmethod
-    def parse_timestamp(value) -> int:
+    def parse_timestamp(self, value: str) -> int:
         data = int(value)
         strlen = len(value)
         if strlen == 13:

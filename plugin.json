@@ -6,7 +6,7 @@
   "Author": "Sunmoon, KTY",
   "Version": "1.1.0",
   "Language": "python",
-  "Website": "https://github.com/kongtianyi/timestampforwox",
+  "Website": "https://github.com/arieslee/timestampforwox",
   "IcoPath": "ui\\icon.png",
   "ExecuteFileName": "transform.py"
 }
