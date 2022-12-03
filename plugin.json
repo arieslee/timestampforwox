@@ -2,11 +2,11 @@
   "ID":"a9d5877f430c5a86b1e4b460c4d76011",
   "ActionKeyword": "ts",
   "Name": "Timestamp",
-  "Description": "本地时间与时间戳互转",
-  "Author": "Sunmoon",
-  "Version": "1.0.0",
+  "Description": "时间戳转换器",
+  "Author": "Sunmoon, KTY",
+  "Version": "1.1.0",
   "Language": "python",
-  "Website": "https://github.com/arieslee/timestampforwox",
+  "Website": "https://github.com/kongtianyi/timestampforwox",
   "IcoPath": "ui\\icon.png",
   "ExecuteFileName": "transform.py"
 }
